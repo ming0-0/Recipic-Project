@@ -1,0 +1,55 @@
+.app-header {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-image {
+  height: 30px; 
+  margin-top: 10px;
+  vertical-align: middle; 
+}
+
+.navigation {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-links {
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  gap: 1rem;
+}
+
+.auth-link {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-link.login { border: 1px solid #ddd; color: #333; }
+.auth-link.signup { background-color: #3b82f6; color: white; }
+
+.welcome-message {
+  color: #333;
+  font-weight: 500;
+  white-space: nowrap; /* 이름이 길어도 줄바꿈 방지 */
+}

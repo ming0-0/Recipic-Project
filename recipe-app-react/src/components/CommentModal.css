@@ -1,0 +1,90 @@
+.comment-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end; /* 화면 하단에서 올라오도록 정렬 */
+  justify-content: center;
+  z-index: 1000;
+}
+
+.comment-modal-content {
+  background-color: white;
+  width: 100%;
+  max-width: 480px; /* 릴스 컨테이너 너비와 일치 */
+  height: 60vh; /* 화면 높이의 60% */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.comment-modal-header {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.comment-modal-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.close-modal-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.comment-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.comment-item p { margin: 0 0 12px 0; font-size: 0.9rem; line-height: 1.4; }
+.comment-item strong { margin-right: 8px; }
+.no-comments { text-align: center; color: #888; margin-top: 40px; }
+
+.comment-input-form {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid #eee;
+  background-color: #f9f9f9;
+}
+
+.comment-input-form input {
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  outline: none;
+}
+
+.comment-input-form button { background: none; border: none; color: #3b82f6; font-weight: 600; cursor: pointer; }
+.comment-input-form button:disabled { color: #a5b4fc; cursor: not-allowed; }
+

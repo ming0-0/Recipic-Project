@@ -1,0 +1,69 @@
+/* :root 가상 클래스는 문서 전체에 적용될 전역 CSS 변수를 선언하는 데 사용됩니다. */
+/* 이렇게 색상, 폰트 크기 등을 변수로 관리하면 유지보수성이 크게 향상됩니다. */
+:root {
+  --color-light-bg: #f0f2f5;
+  --color-light-text: #333;
+  --color-dark-bg: #282c34;
+  --color-dark-text: #f0f2f5;
+  --color-link: #61dafb;
+  --animation-speed: 20s; /* 애니메이션 속도도 변수로 관리할 수 있습니다. */
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+  min-height: 100vh; /* vh는 'viewport height'의 약자로, 화면(뷰포트)의 높이를 기준으로 하는 단위입니다. 100vh는 화면 전체 높이를 의미하여, 콘텐츠가 적더라도 푸터가 화면 하단에 고정되는 효과를 줍니다. */
+  transition: background-color 0.3s ease, color 0.3s ease; /* 테마 변경 시 배경색과 글자색이 0.3초 동안 부드럽게(ease) 변하도록 하여 사용자 경험을 향상시킵니다. */
+}
+
+/* 기본 테마를 라이트 테마로 설정합니다. var() 함수를 사용해 변수 값을 가져옵니다. */
+.light-theme {
+  background-color: var(--color-light-bg);
+  color: var(--color-light-text);
+}
+
+/* .dark-theme 클래스가 적용되면 배경색과 글자색을 어두운 테마의 변수 값으로 덮어씁니다. */
+.dark-theme {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+}
+
+.App-logo {
+  height: 40vmin; /* vmin은 'viewport minimum'의 약자로, 뷰포트의 너비와 높이 중 '더 작은 값'을 기준으로 합니다. 로고 크기가 화면 크기에 따라 반응형으로 조절됩니다. */
+  pointer-events: none; /* 이 속성은 로고가 마우스 클릭, 호버 등 포인터 이벤트를 받지 않도록 합니다. 순수 장식용 요소에 유용합니다. */
+}
+
+/* 
+  @media 쿼리는 특정 조건에서만 스타일을 적용할 때 사용합니다.
+  'prefers-reduced-motion'은 사용자가 운영체제 설정에서 '동작 줄이기'를 활성화했는지 감지합니다.
+  'no-preference'는 사용자가 '동작 줄이기'를 설정하지 않았을 때를 의미하며, 이 경우에만 애니메이션을 실행하는 것은 웹 접근성(a11y) 모범 사례입니다.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite var(--animation-speed) linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin); /* calc() 함수를 사용하면 다른 단위(px, vmin 등)를 섞어 동적으로 값을 계산할 수 있습니다. 반응형 폰트 크기를 지정할 때 매우 유용합니다. */
+  color: white;
+}
+
+.App-link {
+  color: var(--color-link);
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

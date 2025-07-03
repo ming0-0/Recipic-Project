@@ -1,0 +1,194 @@
+ @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+ .main-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+/* Home Page */
+.home-container {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.home-container h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+
+.home-container h1 span {
+  display: block;
+}
+.home-container .brand-name {
+  color: #3b82f6;
+  margin-top: 0.5rem;
+}
+.home-container p {
+  margin-top: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #555;
+  font-size: 1.125rem;
+}
+.home-buttons {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn-primary { background-color: #3b82f6; color: white; }
+.btn-secondary { background-color: white; color: #3b82f6; border: 1px solid #ddd; }
+
+/* Form Styles */
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.form-wrapper {
+  position: relative; /* 자식 요소의 absolute 포지셔닝을 위한 기준점 */
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.form-wrapper h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center; /* 자식 요소들을 중앙 정렬합니다. */
+}
+.form-wrapper input {
+  width: 90%; /* 입력창의 너비를 살짝 줄입니다. */
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+/* form 안의 submit 버튼만 선택하도록 수정 (X 버튼과 충돌 방지) */
+.form-wrapper form button {
+  width: 90%; /* 버튼 너비를 입력창과 맞춥니다. */
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.form-wrapper p { text-align: center; margin-top: 1.5rem; font-size: 0.875rem; }
+.form-link { color: #3b82f6; font-weight: 500; text-decoration: none; }
+
+.close-button {
+  position: absolute;
+  /* X 버튼을 더 작고, 오른쪽 상단에 보기 좋게 배치합니다. */
+  top: 0.75rem;      /* 12px */
+  right: 0.75rem;     /* 12px */
+  width: 1.75rem;     /* 28px */
+  height: 1.75rem;    /* 28px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  font-size: 1.25rem; /* 아이콘(X) 크기를 줄입니다. */
+  line-height: 1;
+  cursor: pointer;
+  color: #9ca3af; /* 아이콘 색상을 조금 더 진하게 변경 */
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.close-button:hover {
+  color: #1f2937; /* 마우스를 올렸을 때 아이콘 색상 */
+  background-color: #f3f4f6; /* 마우스를 올렸을 때 배경색 */
+}
+
+/* --- 구분선 스타일 --- */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #9ca3af; /* 회색 텍스트 */
+  margin: 24px 0;
+  font-size: 0.875rem;
+}
+
+/* '또는' 텍스트 양 옆의 선 */
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e5e7eb; /* 연한 회색 선 */
+}
+
+.divider span {
+  padding: 0 16px; /* 텍스트와 선 사이의 여백 */
+}
+
+/* --- 소셜 로그인 버튼 스타일 --- */
+
+/* 소셜 로그인 버튼들을 담는 컨테이너 */
+.social-login {
+  display: flex;
+  justify-content: center; /* 버튼들을 가운데 정렬 */
+  gap: 16px; /* 버튼 사이의 간격 */
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+/* 모든 소셜 로그인 버튼의 공통 스타일 (동그라미 모양) */
+.btn-social {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* 원 모양으로 만듭니다 */
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex; /* 아이콘을 중앙에 배치하기 위함 */
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* 아이콘 크기 조절 */
+}
+
+.btn-social:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 각 소셜 버튼별 색상 및 아이콘 색상 */
+.btn-kakao {
+  background-color: #FEE500;
+  border-color: #FEE500;
+  color: #3C1E1E; /* 카카오 아이콘 공식 색상 */
+}
+
+.btn-naver {
+  background-color: #03C75A;
+  border-color: #03C75A;
+  color: white;
+}
+
+.btn-google {
+  background-color: #FFFFFF;
+}
