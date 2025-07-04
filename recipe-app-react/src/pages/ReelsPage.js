@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { dummyReels } from '../data/reels';
-import { FaHeart, FaComment, FaShare, FaPlay, FaVolumeUp, FaVolumeMute, FaPlus } from 'react-icons/fa';
+import { FaHeart, FaComment, FaShare, FaPlay, FaVolumeUp, FaVolumeMute, FaPlus, FaTrash } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import CommentModal from '../components/CommentModal';
 import './ReelsPage.css';
@@ -23,6 +23,7 @@ const initialReelsData = dummyReels.reduce((acc, reel) => {
 }, {});
 
 const ReelsPage = () => {
+  const [reels, setReels] = useState(dummyReels); // 릴 목록을 상태로 관리
   const [reelsData, setReelsData] = useState(initialReelsData);
   const videoRefs = useRef({});
   const [isPausedMap, setIsPausedMap] = useState({});
@@ -97,6 +98,37 @@ const ReelsPage = () => {
     });
   };
 
+  const handleProgressClick = (e, reelId) => {
+    const video = videoRefs.current[reelId];
+    // 비디오나 프로그레스 바가 없거나, 비디오 총 재생시간을 알 수 없으면 중단
+    if (!video || !video.duration || !e.currentTarget) return;
+
+    const progressBar = e.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    // 프로그레스 바 내부에서 클릭된 가로 위치 계산
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * video.duration;
+    
+    // 계산된 시간으로 비디오 재생 위치를 업데이트
+    video.currentTime = newTime;
+  };
+
+  const handleDeleteReel = (reelId) => {
+    if (window.confirm('정말로 이 릴스를 삭제하시겠습니까?')) {
+      // 릴 목록에서 해당 릴을 제거합니다.
+      setReels(prevReels => prevReels.filter(reel => reel.id !== reelId));
+
+      // 관련된 좋아요, 댓글 등의 부가 데이터도 함께 제거합니다.
+      setReelsData(prevData => {
+        const newData = { ...prevData };
+        delete newData[reelId];
+        return newData;
+      });
+
+      console.log(`Reel ${reelId} deleted.`);
+    }
+  };
+
   useEffect(() => {
     const options = {
       root: null, // 뷰포트를 root로 사용
@@ -143,7 +175,7 @@ const ReelsPage = () => {
         </Link>
       )}
       <div className="reels-container">
-      {dummyReels.map((reel) => (
+      {reels.map((reel) => (
         <div key={reel.id} className="reel-item" ref={el => (itemRefs.current[reel.id] = el)}>
           <video
             ref={el => (videoRefs.current[reel.id] = el)}
@@ -173,7 +205,10 @@ const ReelsPage = () => {
             <p className="reel-author">by {reel.author}</p>
             <p className="reel-description">{reel.description}</p>
           </div>
-          <div className="progress-bar-container">
+          <div 
+            className="progress-bar-container"
+            onClick={(e) => handleProgressClick(e, reel.id)}
+          >
             <div
               className="progress-bar"
               style={{ width: `${progressMap[reel.id] || 0}%` }}
@@ -195,6 +230,11 @@ const ReelsPage = () => {
               <FaShare />
               <span>공유</span>
             </button>
+            {user && user.name === reel.author && (
+              <button className="action-button" onClick={() => handleDeleteReel(reel.id)} title="삭제하기">
+                <FaTrash />
+              </button>
+            )}
           </div>
         </div>
       ))}

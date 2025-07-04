@@ -1,0 +1,52 @@
+.mypage-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.mypage-container h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+}
+
+.mypage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.user-profile-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.user-profile-box {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.user-profile-box p {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.user-profile-box button {
+  margin-right: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  border: 1px solid #ddd;
+}
+
+.btn-logout {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}

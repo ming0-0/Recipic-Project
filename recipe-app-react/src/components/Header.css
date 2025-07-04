@@ -53,3 +53,36 @@
   font-weight: 500;
   white-space: nowrap; /* 이름이 길어도 줄바꿈 방지 */
 }
+
+.header-right-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cart-link {
+  position: relative;
+  color: #333;
+  font-size: 1.5rem; /* 아이콘 크기 */
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.cart-link:hover {
+  color: #e53e3e;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1;
+  border: 2px solid white;
+}

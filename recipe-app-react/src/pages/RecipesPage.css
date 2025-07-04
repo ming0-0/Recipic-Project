@@ -1,7 +1,3 @@
-.recipes-page-container {
-  /* text-align: center; */ /* 헤더 정렬을 위해 제거 */
-}
-
 .recipes-header {
   display: flex;
   justify-content: space-between;
@@ -37,24 +33,37 @@
 .search-container {
   margin-bottom: 3rem;
   display: flex;
-  gap: 0.5rem;
+  /* The container itself will have the border and shadow */
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.2s ease-in-out;
+  overflow: hidden; /* To make children's corners conform to the parent's radius */
+}
+
+.search-container:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
 
 .search-input {
   flex-grow: 1;
-  padding: 0.85rem 1.5rem;
+  padding: 0.85rem 1.5rem 0.85rem 3rem; /* Left padding for icon */
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 50px; /* 둥근 모서리 */
+  /* Remove individual borders and shadows */
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
   box-sizing: border-box;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: all 0.2s ease-in-out;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 1rem center;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  /* The focus effect is now on the container, so we just change the icon color */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
 }
 
 .search-button {
@@ -64,7 +73,7 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: 0; /* Remove border-radius as the container handles it */
   transition: background-color 0.2s;
   white-space: nowrap;
 }
@@ -125,7 +134,25 @@
 .no-results {
   grid-column: 1 / -1; /* 그리드의 모든 컬럼을 차지하도록 설정 */
   text-align: center;
-  font-size: 1.125rem;
   color: #555;
-  padding: 4rem 0;
+  padding: 4rem 2rem; /* 패딩 조정 */
+  background-color: #f9f9f9; /* 약간의 배경색 추가 */
+  border-radius: 12px; /* 모서리 둥글게 */
+  margin-top: 2rem; /* 위쪽 여백 추가 */
+}
+
+/* '결과 없음' 메시지 내부의 제목 스타일 */
+.no-results h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.75rem 0;
+}
+
+/* '결과 없음' 메시지 내부의 문단 스타일 */
+.no-results p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
 }

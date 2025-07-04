@@ -1,0 +1,140 @@
+.checkout-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.checkout-container h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+}
+
+.checkout-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.checkout-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.checkout-right {
+  flex: 1;
+  position: sticky;
+  top: 84px; /* Header height + margin */
+  align-self: flex-start;
+}
+
+.checkout-section {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.checkout-section h2 {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.user-info p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.btn-edit-address {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.order-item-details {
+  flex-grow: 1;
+}
+
+.order-item-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.order-item-quantity {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0.25rem 0 0;
+}
+
+.order-item-price {
+  font-weight: 600;
+}
+
+.payment-summary {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.payment-summary h2 {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.btn-payment {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #e53e3e;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1.5rem;
+}
+
+.btn-payment:hover {
+  background-color: #c53030;
+}
+
+@media (max-width: 992px) {
+  .checkout-content {
+    flex-direction: column;
+  }
+  .checkout-right {
+    position: static;
+    top: auto;
+    width: 100%;
+  }
+}

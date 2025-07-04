@@ -6,47 +6,11 @@
   padding: 0 2rem;
 }
 
-/* Home Page */
-.home-container {
-  text-align: center;
-  padding: 4rem 0;
+.btn-danger {
+  background-color: #ef4444; /* 빨간색 계열 */
+  color: white;
+  border: 1px solid #ef4444;
 }
-
-.home-container h1 {
-  font-size: 3rem;
-  font-weight: 800;
-}
-
-
-.home-container h1 span {
-  display: block;
-}
-.home-container .brand-name {
-  color: #3b82f6;
-  margin-top: 0.5rem;
-}
-.home-container p {
-  margin-top: 1.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  color: #555;
-  font-size: 1.125rem;
-}
-.home-buttons {
-  margin-top: 2.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-.btn-primary, .btn-secondary {
-  padding: 0.75rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-}
-.btn-primary { background-color: #3b82f6; color: white; }
-.btn-secondary { background-color: white; color: #3b82f6; border: 1px solid #ddd; }
 
 /* Form Styles */
 .form-container {

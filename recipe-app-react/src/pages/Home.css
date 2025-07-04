@@ -1,0 +1,146 @@
+.home-container {
+  position: relative;
+  height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden; /* 비디오가 컨테이너를 벗어나지 않도록 함 */
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 요청하신 '흐린' 효과를 위해 어두운 오버레이를 추가합니다. */
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.home-content {
+  /* z-index를 설정할 필요 없음. 부모의 z-index가 -1, -2이므로 자연스럽게 위로 올라옴 */
+  padding: 20px;
+  border-radius: 10px;
+  /* 텍스트 가독성을 위한 약간의 텍스트 그림자 */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.home-container h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-container .brand-name {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #ffc107; /* 브랜드 색상 예시 */
+  margin-top: 0.5rem;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-buttons .btn-primary,
+.home-buttons .btn-secondary {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
+  position: relative; /* 애니메이션 효과를 위한 기준점 */
+  overflow: hidden;  /* 내부 요소가 경계를 벗어나지 않도록 함 */
+}
+
+.home-buttons .btn-primary {
+  background-color: #ffc107;
+  color: #333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-buttons .btn-primary:hover {
+  background-color: #ffda73; /* 더 밝은 노란색으로 변경 */
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 218, 115, 0.5); /* 빛나는 효과 */
+}
+
+.home-buttons .btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  z-index: 1; /* 텍스트가 ::before 요소 위에 오도록 보장 */
+}
+
+.home-buttons .btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transform: scaleX(0); /* 시작 시 너비를 0으로 설정 */
+  transform-origin: left; /* 왼쪽에서부터 채워지는 효과 */
+  transition: transform 0.3s ease-in-out;
+  z-index: -1; /* 텍스트 뒤에 위치하도록 설정 */
+}
+
+.home-buttons .btn-secondary:hover {
+  color: #333;
+  transform: translateY(-3px);
+}
+
+.home-buttons .btn-secondary:hover::before {
+  transform: scaleX(1); /* 호버 시 버튼을 채움 */
+}
+
+@media (max-width: 768px) {
+  .home-container h1 {
+    font-size: 2.5rem;
+  }
+  .home-container .brand-name {
+    font-size: 3.5rem;
+  }
+  .home-container p {
+    font-size: 1rem;
+  }
+  .home-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .home-buttons .btn-primary,
+  .home-buttons .btn-secondary {
+    width: 80%;
+    max-width: 250px;
+  }
+}
