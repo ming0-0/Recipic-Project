@@ -82,3 +82,37 @@
 .btn-add-to-cart:hover {
   background-color: #2563eb;
 }
+/* 스토어 검색창 */
+.store-search-container {
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.store-search-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.05));
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+.store-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #3b82f6);
+  box-shadow: 0 0 0 4px var(--primary-color-light, rgba(59, 130, 246, 0.2));
+}
+
+/* 검색 결과 없음 메시지 */
+.no-products-found {
+  grid-column: 1 / -1; /* 그리드 전체 너비 차지 */
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}

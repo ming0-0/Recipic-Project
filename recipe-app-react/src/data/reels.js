@@ -38,7 +38,7 @@ export const dummyReels = [
     id: 5,
     videoSrc: porkbelly,
     title: '삼겹살',
-    author: '쐬주가 생각나는..',
-    description: '마지막 볶음밥은 국룰~!!'
+    author: '아재 삼식이',
+    description: '삼겹살'
 },
 ];
