@@ -15,6 +15,7 @@ import CheckoutPage from './pages/CheckoutPage'; // 결제 페이지
 import MyPage from './pages/Mypage';
 import PrivateRoute from './components/PrivateRoute';
 import { SavedRecipeProvider } from './context/SavedRecipeContext';
+import ProductDetailPage from './pages/ProductDetailPage';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="recipes" element={<RecipesPage />} />
           <Route path="reels" element={<ReelsPage />} />
           <Route path="store" element={<StorePage />} />
+          <Route path="store/:productId" element={<ProductDetailPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="recipes/:recipeId" element={<RecipeDetailPage />} />
           {/* Protected Routes */}

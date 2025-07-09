@@ -14,7 +14,7 @@ const Home = () => {
       <div className="home-content">
         <h1>
           <span>세상의 모든 레시피</span>
-          <span className="brand-name">Recipe Pic</span>
+          <span className="brand-name">Recipic</span>
         </h1>
         <p>
           당신만의 특별한 레시피를 공유하고, 전 세계의 요리들을 만나보세요. 짧은

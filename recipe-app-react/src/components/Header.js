@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { FaShoppingCart } from 'react-icons/fa';
-import logoImage from '../assets/images/rp1.png';
+import logoImage from '../assets/images/dada.png';
 import './Header.css';
 
 const Header = () => {

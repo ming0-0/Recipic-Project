@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './RecipesPage.css';
 import { dummyRecipes } from '../data/recipes';
+import RecipeCard from '../components/RecipeCard'; // RecipeCard 컴포넌트 임포트
 
 const RecipesPage = () => {
   const [inputValue, setInputValue] = useState(''); // 사용자가 입력하는 값을 실시간으로 관리
@@ -84,15 +85,7 @@ const RecipesPage = () => {
       <div className="recipe-grid">
         {currentRecipes.length > 0 ? (
           currentRecipes.map(recipe => (
-            <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="recipe-card-link">
-              <div className="recipe-card">
-                <img src={recipe.thumbnail} alt={recipe.title} className="recipe-thumbnail" />
-                <div className="recipe-info">
-                  <h3 className="recipe-title">{recipe.title}</h3>
-                  <p className="recipe-author">by {recipe.author}</p>
-                </div>
-              </div>
-            </Link>
+            <RecipeCard key={recipe.id} recipe={recipe} />
           ))
         ) : (
           // 사용자가 필터링(검색 또는 카테고리 선택)을 시도했으나 결과가 없을 때 메시지를 표시합니다.

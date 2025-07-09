@@ -1,0 +1,65 @@
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e9ecef;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+.recipe-card-image-wrapper {
+  width: 100%;
+  padding-top: 66.66%; /* 3:2 비율의 이미지 컨테이너 */
+  position: relative;
+  overflow: hidden;
+}
+
+.recipe-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 비율을 유지하며 꽉 차도록 */
+  transition: transform 0.3s ease;
+}
+
+.recipe-card:hover .recipe-card-image {
+  transform: scale(1.05); /* 마우스를 올리면 이미지 확대 */
+}
+
+.recipe-card-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-card-category {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #845ef7; /* 포인트 컬러 */
+}
+
+.recipe-card-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  flex-grow: 1; /* 제목 영역이 남은 공간을 차지하여 하단 정보를 아래로 밀어냄 */
+}
+
+.recipe-card-author {
+  margin-top: auto; /* 작성자 정보를 항상 하단에 위치시킴 */
+  font-size: 0.875rem;
+  color: #868e96;
+}

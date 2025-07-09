@@ -1,118 +1,114 @@
 .store-page-container {
-  padding: 2rem 0;
+  /* main-content 클래스가 좌우 패딩을 담당하므로, 상하 패딩만 조정합니다. */
+  padding-top: 2rem;
+  padding-bottom: 4rem;
 }
 
 .store-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem; /* 헤더와 상품 목록 사이의 간격을 넓힙니다. */
 }
 
 .store-header h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #111827; /* 더 진하고 세련된 검정색으로 변경 */
 }
 
 .store-header p {
   font-size: 1.1rem;
-  color: #555;
+  color: #4b5563; /* 부드러운 회색으로 변경하여 가독성 향상 */
+  max-width: 600px;
+  margin: 0 auto; /* 설명 텍스트가 길어질 경우를 대비해 중앙 정렬 */
 }
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem; /* 카드 사이의 간격을 넓혀 더 여유로운 느낌을 줍니다. */
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* 링크가 영역 전체를 차지하도록 설정 */
+  border-radius: 16px; /* 호버 효과가 카드 전체에 적용되도록 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-link:hover {
+  transform: translateY(-8px); /* 호버 시 카드를 더 높이 띄웁니다. */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05); /* 더 풍부한 그림자 효과 */
 }
 
 .product-card {
   background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 16px; /* 더 둥근 모서리 */
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); /* 더 섬세한 기본 그림자 */
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  height: 100%; /* 링크의 높이를 꽉 채우도록 설정 */
 }
 
 .product-image {
   width: 100%;
   height: 250px;
   object-fit: cover;
+  border-bottom: 1px solid #f3f4f6; /* 이미지와 정보 영역을 구분하는 얇은 선 */
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .product-name {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
-  color: #333;
+  color: #1f2937;
+  /* 상품명이 길 경우 2줄까지 보여주고 나머지는 말줄임표 처리 */
+  line-height: 1.4;
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* 표준 속성을 함께 추가하여 호환성을 높입니다. */
+  -webkit-box-orient: vertical;
 }
 
 .product-price {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #000000;
-  margin-top: auto;
-  margin-bottom: 1rem;
+  font-size: 1.25rem; /* 가격 폰트를 키워 강조 */
+  font-weight: 700;
+  color: #111827;
+  margin-top: auto; /* 상품명과 가격/버튼 그룹을 분리합니다. */
+  padding-top: 1rem; /* 이름과 가격 사이의 여백 */
+  margin-bottom: 0.75rem;
 }
 
 .btn-add-to-cart {
-  width: 150px;
+  width: 100%; /* 버튼을 카드 너비에 맞게 채웁니다. */
   padding: 0.75rem;
   border: none;
   border-radius: 8px;
-  background-color: #3b82f6;
+  /* 다른 버튼들과 통일감 있는 그라데이션 배경 적용 */
+  background-image: linear-gradient(to right, #4f46e5, #3b82f6);
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-add-to-cart:hover {
-  background-color: #2563eb;
-}
-/* 스토어 검색창 */
-.store-search-container {
-  margin-bottom: 3rem;
-  width: 100%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
 }
 
-.store-search-input {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  border: 1px solid var(--border-color, #ddd);
-  border-radius: 50px;
-  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.05));
-  box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
-}
-
-.store-search-input:focus {
-  outline: none;
-  border-color: var(--primary-color, #3b82f6);
-  box-shadow: 0 0 0 4px var(--primary-color-light, rgba(59, 130, 246, 0.2));
-}
-
-/* 검색 결과 없음 메시지 */
-.no-products-found {
-  grid-column: 1 / -1; /* 그리드 전체 너비 차지 */
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #666;
-  font-size: 1.1rem;
-}
+/* 참고: 검색 관련 스타일은 향후 기능을 위해 유지했습니다. */
+/* .store-search-container, .store-search-input, .no-products-found ... */

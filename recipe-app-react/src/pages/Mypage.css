@@ -4,54 +4,127 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem; /* 섹션 간 간격 조정 */
 }
 
-.mypage-container h1 {
-  font-size: 2.2rem;
+/* 사용자 정보 섹션 */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: #f9fafb; /* 밝은 배경색 */
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.user-avatar {
+  color: #9ca3af; /* 아이콘 색상 */
+}
+
+.user-details h1 {
+  font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 1rem;
+  margin: 0 0 0.5rem 0;
+  color: #111827;
 }
 
-.mypage-container h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+.user-details p {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin: 0 0 1rem 0;
 }
 
-.user-info-section, .my-recipes-section, .saved-recipes-section {
+.btn-edit-profile {
   background-color: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-.user-info-box p {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 0.75rem;
-}
-
-.user-info-box p strong {
-  color: #000;
-  margin-right: 0.5rem;
-}
-
-.no-recipes-message {
-  text-align: center;
-  color: #777;
-  padding: 3rem 0;
-  font-size: 1.1rem;
-}
-
-.no-recipes-message a {
-  color: #3b82f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   font-weight: 600;
-  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.no-recipes-message a:hover {
-  text-decoration: underline;
+.btn-edit-profile:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+/* 탭 메뉴 스타일 */
+.mypage-tabs {
+  display: flex;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6b7280;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  bottom: -2px; /* 하단 보더와 겹치도록 */
+  transition: color 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button:hover {
+  color: #111827;
+}
+
+.tab-button.active {
+  color: var(--primary-color, #3b82f6);
+  border-bottom-color: var(--primary-color, #3b82f6);
+}
+
+/* 탭 컨텐츠 공통 스타일 */
+.tab-pane h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+/* 컨텐츠 없음 메시지 */
+.no-content-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  border: 1px dashed #d1d5db;
+}
+
+.no-content-message p {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.mypage-container h1,
+.mypage-container h2 {
+  border-bottom: none; /* 기존 h1, h2의 보더 제거 */
+  padding-bottom: 0;
+}
+
+/* 버튼 스타일 (no-content-message 내부) */
+.no-content-message .btn-primary {
+  background-image: linear-gradient(to right, #4f46e5, #3b82f6);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: inline-block; /* Link 태그에 적용하기 위함 */
+}
+
+.no-content-message .btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
