@@ -2,6 +2,7 @@ package com.recipe.app.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +13,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.WebUtils; // Import WebUtils
 
 import java.io.IOException;
 
@@ -30,17 +32,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String token = getTokenFromRequest(request);
 
+        // 1. Get JWT from the cookie
+        String token = getTokenFromCookie(request);
 
+        // 2. Validate token
         if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
+            // 3. Get username from token
             String username = tokenProvider.getUsername(token);
 
+            // 4. Load user associated with token
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+            // 5. Set authentication in security context
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities()
+                    userDetails,
+                    null,
+                    userDetails.getAuthorities()
             );
+
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
@@ -48,10 +58,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String getTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
+    // ✅ Helper method to extract token from cookie
+    private String getTokenFromCookie(HttpServletRequest request) {
+        Cookie cookie = WebUtils.getCookie(request, "accessToken"); // "accessToken" is the cookie name
+        if (cookie != null) {
+            return cookie.getValue();
         }
         return null;
     }

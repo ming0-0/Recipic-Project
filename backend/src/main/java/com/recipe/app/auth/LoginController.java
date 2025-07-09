@@ -1,7 +1,8 @@
 package com.recipe.app.auth;
 
-
 import com.recipe.app.jwt.JwtTokenProvider;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +35,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.username(),
@@ -43,6 +44,15 @@ public class LoginController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthResponse(token));
+        ResponseCookie cookie = ResponseCookie.from("accessToken", token)
+                .httpOnly(true)
+                .secure(true) // Should be true in production (HTTPS)
+                .path("/")
+                .maxAge(60 * 60 * 24) // 1 day
+                .sameSite("Strict")
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Login successful");
     }
 }

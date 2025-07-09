@@ -1,49 +1,71 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import api from '../auth/api'; // Import our configured axios instance
 
-// 1. Context 생성: 앱 전체에 공유할 저장소(Context)를 만듭니다.
+// Create the context
 const AuthContext = createContext(null);
 
-// 2. Provider 생성: Context의 값을 정하고, 자식 컴포넌트들에게 값을 전달하는 역할을 합니다.
+// Create the provider component
 export const AuthProvider = ({ children }) => {
-  // useState의 초기값으로 함수를 전달하면, 컴포넌트가 처음 렌더링될 때 한 번만 실행됩니다.
-  // localStorage에서 'isLoggedIn' 값을 읽어와 초기 상태를 설정합니다.
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return localStorage.getItem('isLoggedIn') === 'true';
-  });
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
-    try {
-      return storedUser ? JSON.parse(storedUser) : null;
-    } catch (error) {
-      console.error("Failed to parse user from localStorage", error);
-      return null;
-    }
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // To handle initial auth check
 
-  // 로그인 함수 (현재는 시뮬레이션)
-  const login = (userData) => {
-    // 실제로는 서버 응답 성공 시 호출됩니다.
-    localStorage.setItem('isLoggedIn', 'true'); // localStorage에 로그인 상태 저장
-    localStorage.setItem('user', JSON.stringify(userData)); // 사용자 정보를 JSON 문자열로 저장
-    setIsLoggedIn(true);
-    setUser(userData);
+  // This effect runs once when the app loads to check for a valid session
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        // Make a request to a protected endpoint to see if the session is still valid
+        // Your backend should have an endpoint like `/api/user/me` that returns user data
+        const response = await api.get('/api/user/me');
+        setUser(response.data); // If successful, set the user
+      } catch (error) {
+        // If the request fails, the user is not authenticated
+        setUser(null);
+      } finally {
+        // We're done checking, so set loading to false
+        setLoading(false);
+      }
+    };
+
+    checkAuthStatus();
+  }, []);
+
+  // Login function
+  const login = async (credentials) => {
+    // The server will set the HttpOnly cookie upon successful login
+    await api.post('/api/login', credentials);
+    // After login, fetch the user data to update the context state
+    const response = await api.get('/api/user/me');
+    setUser(response.data);
   };
 
-  // 로그아웃 함수
-  const logout = () => {
-    localStorage.removeItem('isLoggedIn'); // localStorage에서 로그인 상태 제거
-    localStorage.removeItem('user'); // 사용자 정보도 제거
-    setIsLoggedIn(false);
-    setUser(null);
+  // Logout function
+  const logout = async () => {
+    // Tell the server to clear the authentication cookie
+    await api.post('/api/logout');
+    setUser(null); // Clear the user state on the client
   };
 
-  // Provider가 자식들에게 전달할 값들
-  const value = { isLoggedIn, user, login, logout };
+  // The value provided to the context consumers
+  const value = {
+    user,
+    login,
+    logout,
+    isAuthenticated: !!user, // A handy boolean to check if the user is logged in
+  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  // Don't render the rest of the app until the initial auth check is complete
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner component
+  }
+
+  return (
+      <AuthContext.Provider value={value}>
+        {children}
+      </AuthContext.Provider>
+  );
 };
 
-// 3. Custom Hook 생성: 다른 컴포넌트에서 Context 값을 쉽게 가져다 쓸 수 있도록 도와줍니다.
+// Custom hook to easily use the auth context in other components
 export const useAuth = () => {
   return useContext(AuthContext);
 };

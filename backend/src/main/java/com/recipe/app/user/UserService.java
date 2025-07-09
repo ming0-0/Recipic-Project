@@ -1,5 +1,7 @@
 package com.recipe.app.user;
 
+import java.util.Optional;
+
 public interface UserService {
-    void saveUser(User user);
+    Optional<User> findByUsername(String username);
 }
