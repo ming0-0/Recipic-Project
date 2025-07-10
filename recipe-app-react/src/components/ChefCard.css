@@ -1,0 +1,44 @@
+.chef-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.chef-card-link:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.chef-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chef-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.chef-card-info {
+  padding: 1rem;
+}
+
+.chef-card-name {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.chef-card-specialty {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+

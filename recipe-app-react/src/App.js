@@ -16,6 +16,8 @@ import MyPage from './pages/Mypage';
 import PrivateRoute from './components/PrivateRoute';
 import { SavedRecipeProvider } from './context/SavedRecipeContext';
 import ProductDetailPage from './pages/ProductDetailPage';
+import ChefPage from './pages/ChefPage';
+import ChefDetailPage from './pages/ChefDetailPage';
 import './App.css';
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route path="recipes" element={<RecipesPage />} />
           <Route path="reels" element={<ReelsPage />} />
           <Route path="store" element={<StorePage />} />
+          <Route path="chef" element={<ChefPage />} />
+          <Route path="chef/:chefName" element={<ChefDetailPage />} />"
           <Route path="store/:productId" element={<ProductDetailPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="recipes/:recipeId" element={<RecipeDetailPage />} />

@@ -36,6 +36,9 @@ const Header = () => {
           <Link to="/store" className="nav-link">
             스토어
           </Link>
+          <Link to="/chef" className='nav-link'>
+            쉐프 찾기
+          </Link>
         </nav>
         <div className="header-right-section">
           <Link to="/cart" className="cart-link" title="장바구니">

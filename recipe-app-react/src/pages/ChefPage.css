@@ -1,0 +1,27 @@
+.chef-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.chef-page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.chef-page-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.chef-page-header p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.chef-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
