@@ -32,14 +32,11 @@ function App() {
           <Route path="store" element={<StorePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="recipes/:recipeId" element={<RecipeDetailPage />} />
-          {/* Protected Routes */}
-          <Route element={<PrivateRoute />}>
-            <Route path="recipes/new" element={<NewRecipePage />} />
-            <Route path="recipes/:recipeId/edit" element={<EditRecipePage />} /> {/* 수정 페이지 라우트 추가 */}
-            <Route path="reels/new" element={<NewReelPage />} />
-            <Route path="mypage" element={<MyPage />} />
-            <Route path="checkout" element={<CheckoutPage />} />
-          </Route>
+          <Route path="recipes/new" element={<NewRecipePage />} />
+          <Route path="recipes/:recipeId/edit" element={<EditRecipePage />} /> {/* 수정 페이지 라우트 추가 */}
+          <Route path="reels/new" element={<NewReelPage />} />
+          <Route path="mypage" element={<MyPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
         </Route>
       </Routes>
     </SavedRecipeProvider>

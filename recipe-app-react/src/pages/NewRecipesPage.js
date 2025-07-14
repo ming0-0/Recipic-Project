@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './NewRecipePage.css';
+import api from "../auth/api";
 
 const NewRecipePage = () => {
   const navigate = useNavigate();
@@ -8,7 +10,7 @@ const NewRecipePage = () => {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-
+  const { user } = useAuth();
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -21,16 +23,27 @@ const NewRecipePage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // 나중에 실제 API 호출로 대체합니다.
-    console.log({
-      title,
-      description,
-      image,
-    });
-    alert('레시피가 등록되었습니다! (개발자 콘솔을 확인해보세요)');
-    navigate('/recipes'); // 등록 후 레시피 목록으로 이동
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('image', image);
+    formData.append('userId', user.id);
+
+    try {
+      const response = await api.post('/api/recipes/add', formData);
+
+      console.log('Recipe created successfully:', response.data, user.id);
+      alert('레시피가 성공적으로 등록되었습니다!');
+      navigate('/recipes'); // Redirect after successful submission
+
+    } catch (error) {
+      console.error('Error creating recipe:', error);
+      // It's helpful to provide more specific error feedback if the API sends it
+      const errorMessage = error.response?.data?.message || '레시피 등록에 실패했습니다.';
+      alert(errorMessage);
+    }
   };
 
   return (

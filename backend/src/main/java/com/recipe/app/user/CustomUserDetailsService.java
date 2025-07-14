@@ -22,7 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         User myUser = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
-        // 2. Convert your User entity into a UserDetails object that Spring Security understands
         return new org.springframework.security.core.userdetails.User(
                 myUser.getUsername(),
                 myUser.getPassword(),

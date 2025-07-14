@@ -51,16 +51,8 @@ const SignupPage = () => {
         }
         throw new Error(errorMessage);
       }
-
       console.log('회원가입 성공!');
-
-      // The rest of the function remains the same.
-      // Note: A successful registration (201 Created) often doesn't return a body.
-      // If you expect user data back, ensure your server sends it.
-      // For now, we'll use the form data as before.
-      const userData = { username: formValues.username, email: formValues.email };
-      login(userData);
-      navigate('/');
+      navigate('/login');
 
     } catch (error) {
       console.error('회원가입 오류:', error);

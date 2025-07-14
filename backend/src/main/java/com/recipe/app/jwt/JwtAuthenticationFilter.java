@@ -33,18 +33,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        // 1. Get JWT from the cookie
         String token = getTokenFromCookie(request);
 
-        // 2. Validate token
         if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
-            // 3. Get username from token
             String username = tokenProvider.getUsername(token);
-
-            // 4. Load user associated with token
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            // 5. Set authentication in security context
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     userDetails,
                     null,

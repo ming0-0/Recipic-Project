@@ -9,6 +9,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:./uploads/
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 app:
   jwt-secret: tempRandomStringforDevelopmentPurposes_123456789123456789
   jwt-expiration-milliseconds: 86400000

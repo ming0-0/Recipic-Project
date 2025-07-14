@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 record LoginRequest(String username, String password) {}
 
-record JwtAuthResponse(String accessToken, String tokenType) {
-    public JwtAuthResponse(String accessToken) {
-        this(accessToken, "Bearer");
-    }
-}
-
 
 @RestController
 @RequestMapping("/api")
@@ -46,13 +40,30 @@ public class LoginController {
         String token = tokenProvider.generateToken(authentication);
         ResponseCookie cookie = ResponseCookie.from("accessToken", token)
                 .httpOnly(true)
-                .secure(true) // Should be true in production (HTTPS)
+                .secure(true)
                 .path("/")
-                .maxAge(60 * 60 * 24) // 1 day
+                .maxAge(60 * 60 * 24)
                 .sameSite("Strict")
                 .build();
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Login successful");
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        SecurityContextHolder.clearContext();
+        // maxAge가 0인 토큰을 발급하여 초기화
+        ResponseCookie cookie = ResponseCookie.from("accessToken", "")
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(0)
+                .sameSite("Strict")
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body("Logout successful");
     }
 }

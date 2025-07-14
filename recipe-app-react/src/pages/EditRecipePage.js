@@ -1,90 +1,112 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { dummyRecipes } from '../data/recipes';
 import { useAuth } from '../context/AuthContext';
-import './NewRecipePage.css'; // 새 레시피 작성과 동일한 스타일을 재사용합니다.
+import api from '../auth/api'; // Import your configured Axios instance
+import './NewRecipePage.css';
 
 const EditRecipePage = () => {
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const [recipe, setRecipe] = useState(null);
+  // State for form fields
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [thumbnail, setThumbnail] = useState(null);
-  const [thumbnailPreview, setThumbnailPreview] = useState('');
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+
+  // State for loading/error handling
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const recipeToEdit = dummyRecipes.find(r => r.id === parseInt(recipeId));
-    if (recipeToEdit) {
-      // 보안 검사: 레시피 작성자만 수정할 수 있도록 합니다.
-      if (!user || user.name !== recipeToEdit.author) {
-        alert('레시피를 수정할 권한이 없습니다.');
-        navigate(`/recipes/${recipeId}`);
-        return;
+    const fetchRecipeForEdit = async () => {
+      try {
+        const response = await api.get(`/api/recipes/${recipeId}`);
+        const recipeToEdit = response.data;
+
+        // Security check: Only the author can edit
+        if (!user || user.id !== recipeToEdit.user.id) {
+          alert('You do not have permission to edit this recipe.');
+          navigate(`/recipes/${recipeId}`);
+          return;
+        }
+
+        // Populate the form with existing data
+        setTitle(recipeToEdit.title);
+        setDescription(recipeToEdit.description);
+        setImagePreview(recipeToEdit.imageUrl);
+      } catch (error) {
+        alert('Could not find the recipe.');
+        navigate('/recipes');
+      } finally {
+        setLoading(false);
       }
-      setRecipe(recipeToEdit);
-      setTitle(recipeToEdit.title);
-      setDescription(recipeToEdit.description);
-      setThumbnailPreview(recipeToEdit.thumbnail);
-    } else {
-      alert('존재하지 않는 레시피입니다.');
-      navigate('/recipes');
-    }
+    };
+
+    fetchRecipeForEdit();
   }, [recipeId, user, navigate]);
 
-  const handleThumbnailChange = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setThumbnail(file);
-      setThumbnailPreview(URL.createObjectURL(file));
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 실제 앱에서는 이 데이터를 서버로 보내 업데이트 API를 호출합니다.
-    console.log('Recipe Updated:', {
-      id: recipe.id,
-      title,
-      description,
-      author: user.name,
-      thumbnail: thumbnail ? thumbnail.name : recipe.thumbnail, // 데모를 위해 단순화
-    });
-    alert('레시피가 성공적으로 수정되었습니다. (실제 데이터는 변경되지 않습니다.)');
-    navigate(`/recipes/${recipe.id}`);
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    if (image) { // Only append the image if a new one was selected
+      formData.append('image', image);
+    }
+
+    try {
+      await api.put(`/api/recipes/${recipeId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('Recipe updated successfully!');
+      navigate(`/recipes/${recipeId}`);
+    } catch (error) {
+      alert('Failed to update the recipe.');
+      console.error(error);
+    }
   };
 
-  if (!recipe) {
-    return <div>레시피 정보를 불러오는 중...</div>;
+  if (loading) {
+    return <div>Loading recipe information...</div>;
   }
 
   return (
-    <div className="new-recipe-container">
-      <form onSubmit={handleSubmit} className="new-recipe-form">
-        <h2>레시피 수정하기</h2>
-        <div className="form-group">
-          <label htmlFor="title">레시피 제목</label>
-          <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">레시피 설명</label>
-          <textarea id="description" rows="4" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="thumbnail">썸네일 이미지</label>
-          <input type="file" id="thumbnail" accept="image/*" onChange={handleThumbnailChange} />
-        </div>
-        {thumbnailPreview && (
-          <div className="image-preview-container">
-            <p>이미지 미리보기</p>
-            <img src={thumbnailPreview} alt="썸네일 미리보기" className="image-preview" />
+      <div className="new-recipe-container">
+        <form onSubmit={handleSubmit} className="new-recipe-form">
+          <h2>Edit Recipe</h2>
+          <div className="form-group">
+            <label htmlFor="title">Recipe Title</label>
+            <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           </div>
-        )}
-        <button type="submit" className="submit-btn">수정 완료</button>
-      </form>
-    </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea id="description" rows="4" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="image">New Image (Optional)</label>
+            <input type="file" id="image" accept="image/*" onChange={handleImageChange} />
+          </div>
+          {imagePreview && (
+              <div className="image-preview-container">
+                <p>Image Preview</p>
+                <img src={imagePreview} alt="Recipe preview" className="image-preview" />
+              </div>
+          )}
+          <button type="submit" className="submit-btn">Update Recipe</button>
+        </form>
+      </div>
   );
 };
 
