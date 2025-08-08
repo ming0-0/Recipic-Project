@@ -11,13 +11,13 @@
 
 .store-header h1 {
   font-size: 2.5rem;
-  font-weight: 800;
   margin-bottom: 0.75rem;
+  font-weight: 700; /* 제목 폰트 두께를 표준 bold로 조정 */
   color: #111827; /* 더 진하고 세련된 검정색으로 변경 */
 }
 
 .store-header p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #4b5563; /* 부드러운 회색으로 변경하여 가독성 향상 */
   max-width: 600px;
   margin: 0 auto; /* 설명 텍스트가 길어질 경우를 대비해 중앙 정렬 */
@@ -69,8 +69,8 @@
 
 .product-name {
   font-size: 1.1rem;
-  font-weight: 700;
   margin: 0 0 0.5rem 0;
+  font-weight: 500; /* 상품명 폰트를 medium 두께로 조정 */
   color: #1f2937;
   /* 상품명이 길 경우 2줄까지 보여주고 나머지는 말줄임표 처리 */
   line-height: 1.4;
@@ -83,8 +83,8 @@
 }
 
 .product-price {
-  font-size: 1.25rem; /* 가격 폰트를 키워 강조 */
-  font-weight: 700;
+  font-size: 1rem; /* 가격 폰트를 키워 강조 */
+  font-weight: 300; /* 가격 폰트 두께를 semi-bold로 조정 */
   color: #111827;
   margin-top: auto; /* 상품명과 가격/버튼 그룹을 분리합니다. */
   padding-top: 1rem; /* 이름과 가격 사이의 여백 */
@@ -99,7 +99,7 @@
   /* 다른 버튼들과 통일감 있는 그라데이션 배경 적용 */
   background-image: linear-gradient(to right, #4f46e5, #3b82f6);
   color: white;
-  font-weight: 600;
+  font-weight: 500; /* 버튼 폰트를 medium 두께로 조정 */
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -109,6 +109,3 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
 }
-
-/* 참고: 검색 관련 스타일은 향후 기능을 위해 유지했습니다. */
-/* .store-search-container, .store-search-input, .no-products-found ... */

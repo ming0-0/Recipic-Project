@@ -23,14 +23,13 @@ const NewRecipePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 나중에 실제 API 호출로 대체합니다.
     console.log({
       title,
       description,
       image,
     });
     alert('레시피가 등록되었습니다! (개발자 콘솔을 확인해보세요)');
-    navigate('/recipes'); // 등록 후 레시피 목록으로 이동
+    navigate('/recipes');
   };
 
   return (
