@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/bc103ad5-4108-4241-bbbb-5eee4b18d4fb" alt="logo" width="800" height="350">
+  <img src="https://github.com/user-attachments/assets/bc103ad5-4108-4241-bbbb-5eee4b18d4fb" alt="logo" width="350" height="350">
 </div>
 
 # RecipePic 프론트엔드
@@ -11,7 +11,7 @@ RecipePic은 React 기반의 레시피 공유 및 요리 커뮤니티 웹앱입�
 
 ### 1. 레시피 페이지
 <div align="center">
-  <img src="" alt="mainpage" width="800" height="350">
+  <img src="https://github.com/user-attachments/assets/dccf3e81-96a6-48a9-b386-7a60f3024942" alt="mainpage" width="800" height="400">
 </div>
 - 다양한 카테고리별 레시피 목록 제공<br>
 - 레시피 상세 페이지에서 재료, 조리법, 이미지, 동영상 확인 가능<br>
